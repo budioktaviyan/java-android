@@ -1,0 +1,29 @@
+buildscript {
+    ext {
+        androidPluginVersion = '2.2.2'
+        androidSupportVersion = '25.0.0'
+        multidexVersion = '1.0.1'
+        retrofitVersion = '2.1.0'
+        okHttpVersion = '3.4.1'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:${androidPluginVersion}")
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}
