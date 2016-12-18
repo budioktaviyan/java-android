@@ -1,4 +1,4 @@
-package com.baculsoft.java.android.internal.api.response;
+package com.baculsoft.java.android.internal.data.remote;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * @author Budi Oktaviyan Suryanto (budi@baculsoft.com)
+ * @author Budi Oktaviyan Suryanto (budioktaviyans@gmail.com)
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TwitterSearchResponse {

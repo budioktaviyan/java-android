@@ -8,21 +8,11 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * @author Budi Oktaviyan Suryanto (budi@baculsoft.com)
+ * @author Budi Oktaviyan Suryanto (budioktaviyans@gmail.com)
  */
 public final class Dates {
     private static final SimpleDateFormat EEEMMMddHHmmsszzzyyyy = new SimpleDateFormat(IConstants.IPatterns.EEEMMMddHHmmsszzzyyyy, Locale.getDefault());
     private static final SimpleDateFormat ddMMyyyyHHmmss = new SimpleDateFormat(IConstants.IPatterns.ddMMyyyyHHmmss, Locale.getDefault());
-
-    private static volatile Dates INSTANCE = null;
-
-    public static synchronized Dates get() {
-        if (INSTANCE == null) {
-            INSTANCE = new Dates();
-        }
-
-        return INSTANCE;
-    }
 
     public Date getDateTime(final String dateTime) {
         final DateFormat dateFormat = EEEMMMddHHmmsszzzyyyy;

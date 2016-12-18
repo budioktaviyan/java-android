@@ -1,7 +1,7 @@
 package com.baculsoft.java.android.utils;
 
 /**
- * @author Budi Oktaviyan Suryanto (budi@baculsoft.com)
+ * @author Budi Oktaviyan Suryanto (budioktaviyans@gmail.com)
  */
 public interface IConstants {
 
@@ -11,7 +11,10 @@ public interface IConstants {
 
     interface IUrls {
         String BASE_URL = "http://ibacor.com/api/";
-        String TWITTER_SEARCH = "twitter-search";
+
+        interface IApis {
+            String TWITTER_SEARCH = "twitter-search";
+        }
     }
 
     interface IBundles {

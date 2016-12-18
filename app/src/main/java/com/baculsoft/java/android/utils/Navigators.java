@@ -1,31 +1,30 @@
 package com.baculsoft.java.android.utils;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.baculsoft.java.android.internal.pojo.TwitterSearch;
-import com.baculsoft.java.android.views.activities.ResultActivity;
+import com.baculsoft.java.android.internal.data.local.TwitterSearch;
+import com.baculsoft.java.android.views.result.ResultActivity;
+
+import org.parceler.Parcels;
 
 /**
- * @author Budi Oktaviyan Suryanto (budi@baculsoft.com)
+ * @author Budi Oktaviyan Suryanto (budioktaviyans@gmail.com)
  */
 public final class Navigators {
-    private static volatile Navigators INSTANCE = null;
+    private static final String TAG = Navigators.class.getSimpleName();
 
-    public static synchronized Navigators get() {
-        if (INSTANCE == null) {
-            INSTANCE = new Navigators();
+    public void openResultActivity(final Activity activity, final TwitterSearch twitterSearch) {
+        try {
+            final Intent intent = new Intent(activity, ResultActivity.class);
+            final Bundle bundle = new Bundle();
+            bundle.putParcelable(IConstants.IBundles.TWITTER_SEARCH, Parcels.wrap(twitterSearch));
+            intent.putExtras(bundle);
+            activity.startActivity(intent);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
         }
-
-        return INSTANCE;
-    }
-
-    public void openResultActivity(final Context context, final TwitterSearch twitterSearch) {
-        final Intent intent = new Intent(context, ResultActivity.class);
-        final Bundle bundle = new Bundle();
-        bundle.putParcelable(IConstants.IBundles.TWITTER_SEARCH, twitterSearch);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
     }
 }
