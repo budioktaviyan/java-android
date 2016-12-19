@@ -9,15 +9,12 @@ import android.view.MenuItem;
 
 import com.baculsoft.java.android.App;
 import com.baculsoft.java.android.R;
-import com.baculsoft.java.android.internal.data.local.TwitterSearch;
 import com.baculsoft.java.android.internal.data.local.TwitterSearchResult;
 import com.baculsoft.java.android.internal.injectors.component.ActivityComponent;
 import com.baculsoft.java.android.internal.injectors.component.DaggerActivityComponent;
 import com.baculsoft.java.android.internal.injectors.module.ActivityModule;
 import com.baculsoft.java.android.utils.Dates;
 import com.baculsoft.java.android.views.base.BaseActivity;
-
-import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -59,6 +56,7 @@ public class ResultActivity extends BaseActivity implements ResultView {
     protected void initComponents(Bundle savedInstanceState) {
         inject();
         onAttach();
+        setToolbar();
     }
 
     @Override
@@ -72,31 +70,11 @@ public class ResultActivity extends BaseActivity implements ResultView {
     @Override
     public void onAttach() {
         mPresenter.onAttach(this);
-
-        final TwitterSearch twitterSearch = Parcels.unwrap(mPresenter.getTwitterSearch(this));
-        final List<TwitterSearchResult> results = twitterSearch.getTwitterSearchResults();
-        final int count = twitterSearch.getCount();
-
-        toolbarResult.setPadding(0, getStatusBarHeight(), 0, 0);
-        toolbarResult.setNavigationIcon(ContextCompat.getDrawable(this, R.mipmap.ic_arrow_back));
-        toolbarResult.setTitle(textSearchResult);
-        toolbarResult.setSubtitle(String.format(textSearchCount, count));
-        setSupportActionBar(toolbarResult);
-
-        mPresenter.setAdapter(mDates, results);
     }
 
     @Override
     public void onDetach() {
         mPresenter.onDetach();
-    }
-
-    @Override
-    public void onAdapterSetup(ResultAdapter adapter) {
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rvResult.setLayoutManager(linearLayoutManager);
-        rvResult.smoothScrollToPosition(rvResult.getBottom());
-        rvResult.setAdapter(adapter);
     }
 
     @Override
@@ -119,5 +97,23 @@ public class ResultActivity extends BaseActivity implements ResultView {
 
     public ActivityComponent getComponent() {
         return mComponent;
+    }
+
+    private void setToolbar() {
+        toolbarResult.setPadding(0, getStatusBarHeight(), 0, 0);
+        toolbarResult.setNavigationIcon(ContextCompat.getDrawable(this, R.mipmap.ic_arrow_back));
+        toolbarResult.setTitle(textSearchResult);
+        toolbarResult.setSubtitle(String.format(textSearchCount, mPresenter.getCount(this)));
+        setSupportActionBar(toolbarResult);
+        setAdapter(mPresenter.getResults(this));
+    }
+
+    private void setAdapter(final List<TwitterSearchResult> results) {
+        final ResultAdapter adapter = new ResultAdapter(mDates, results);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+        rvResult.setLayoutManager(linearLayoutManager);
+        rvResult.smoothScrollToPosition(rvResult.getBottom());
+        rvResult.setAdapter(adapter);
     }
 }

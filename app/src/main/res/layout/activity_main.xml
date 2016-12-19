@@ -80,6 +80,7 @@
                         android:hint="@string/hint_search_page"
                         android:imeOptions="actionDone"
                         android:inputType="number"
+                        android:maxLength="9"
                         android:textColor="@color/colorPrimaryDark"
                         android:textCursorDrawable="@drawable/bg_text_cursor"
                         android:textSize="14sp" />

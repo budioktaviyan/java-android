@@ -39,7 +39,8 @@ public class NetworkModule {
         return new Retrofit.Builder().client(okHttpClient)
                                      .baseUrl(baseUrl)
                                      .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                                     .addConverterFactory(JacksonConverterFactory.create()).build();
+                                     .addConverterFactory(JacksonConverterFactory.create())
+                                     .build();
     }
 
     @Provides
@@ -59,10 +60,11 @@ public class NetworkModule {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         return new OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS)
-                                         .writeTimeout(15, TimeUnit.SECONDS)
                                          .readTimeout(15, TimeUnit.SECONDS)
+                                         .writeTimeout(15, TimeUnit.SECONDS)
                                          .retryOnConnectionFailure(true)
                                          .addInterceptor(interceptor)
-                                         .addInterceptor(httpLoggingInterceptor).build();
+                                         .addInterceptor(httpLoggingInterceptor)
+                                         .build();
     }
 }

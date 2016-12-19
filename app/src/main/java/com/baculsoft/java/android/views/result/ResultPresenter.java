@@ -1,12 +1,13 @@
 package com.baculsoft.java.android.views.result;
 
 import android.app.Activity;
-import android.os.Parcelable;
 
+import com.baculsoft.java.android.internal.data.local.TwitterSearch;
 import com.baculsoft.java.android.internal.data.local.TwitterSearchResult;
-import com.baculsoft.java.android.utils.Dates;
 import com.baculsoft.java.android.utils.IConstants;
 import com.baculsoft.java.android.views.base.IPresenter;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -32,12 +33,15 @@ public class ResultPresenter implements IPresenter<ResultView> {
         mView = null;
     }
 
-    public Parcelable getTwitterSearch(final Activity activity) {
-        return activity.getIntent().getParcelableExtra(IConstants.IBundles.TWITTER_SEARCH);
+    public List<TwitterSearchResult> getResults(final Activity activity) {
+        return getTwitterSearch(activity).getTwitterSearchResults();
     }
 
-    public void setAdapter(final Dates dates, final List<TwitterSearchResult> results) {
-        final ResultAdapter adapter = new ResultAdapter(dates, results);
-        mView.onAdapterSetup(adapter);
+    public int getCount(final Activity activity) {
+        return getTwitterSearch(activity).getCount();
+    }
+
+    private TwitterSearch getTwitterSearch(final Activity activity) {
+        return Parcels.unwrap(activity.getIntent().getParcelableExtra(IConstants.IBundles.TWITTER_SEARCH));
     }
 }

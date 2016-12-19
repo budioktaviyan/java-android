@@ -46,7 +46,7 @@ public class MainPresenter implements IPresenter<MainView> {
 
     public void validateSearch(final String query, final String page) {
         if (!TextUtils.isEmpty(query) && !TextUtils.isEmpty(page)) {
-            mView.onValidationFailed();
+            mView.onValidate();
         }
     }
 

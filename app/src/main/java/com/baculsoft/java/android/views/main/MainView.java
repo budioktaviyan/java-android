@@ -7,7 +7,7 @@ import com.baculsoft.java.android.views.base.IView;
  * @author Budi Oktaviyan Suryanto (budioktaviyans@gmail.com)
  */
 public interface MainView extends IView {
-    void onValidationFailed();
+    void onValidate();
 
     void onShowProgressDialog();
 

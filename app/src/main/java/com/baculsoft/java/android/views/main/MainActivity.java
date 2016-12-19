@@ -91,6 +91,7 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void initComponents(Bundle savedInstanceState) {
         inject();
         onAttach();
+        setToolbar();
     }
 
     @Override
@@ -104,11 +105,6 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void onAttach() {
         mPresenter.onAttach(this);
-        toolbarMain.setPadding(0, getStatusBarHeight(), 0, 0);
-        toolbarMain.setTitle(appName);
-        toolbarMain.setSubtitle(appDesc);
-        setSupportActionBar(toolbarMain);
-
     }
 
     @Override
@@ -117,7 +113,7 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public void onValidationFailed() {
+    public void onValidate() {
         btnMain.setEnabled(true);
     }
 
@@ -144,12 +140,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
         if ((null != mProgressDialog) && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
-            tietMainQuery.getText().clear();
-            tietMainPage.getText().clear();
-            spMainType.setSelection(0);
-            spMainResult.setSelection(0);
-            mKeyboards.hide(clMain, this);
-            clMain.requestFocus();
+            reset();
         }
     }
 
@@ -202,5 +193,21 @@ public class MainActivity extends BaseActivity implements MainView {
 
     public ActivityComponent getComponent() {
         return mComponent;
+    }
+
+    private void setToolbar() {
+        toolbarMain.setPadding(0, getStatusBarHeight(), 0, 0);
+        toolbarMain.setTitle(appName);
+        toolbarMain.setSubtitle(appDesc);
+        setSupportActionBar(toolbarMain);
+    }
+
+    private void reset() {
+        tietMainQuery.getText().clear();
+        tietMainPage.getText().clear();
+        spMainType.setSelection(0);
+        spMainResult.setSelection(0);
+        mKeyboards.hide(clMain, this);
+        clMain.requestFocus();
     }
 }
