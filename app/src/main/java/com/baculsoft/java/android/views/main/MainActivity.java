@@ -113,11 +113,6 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public void onValidate() {
-        btnMain.setEnabled(true);
-    }
-
-    @Override
     public void onShowProgressDialog() {
         mProgressDialog = mCommonUtils.getProgressDialog(this);
         if (!mProgressDialog.isShowing()) {
@@ -170,7 +165,7 @@ public class MainActivity extends BaseActivity implements MainView {
         final String query = tietMainQuery.getText().toString();
         final String page = tietMainPage.getText().toString();
 
-        mPresenter.validateSearch(query, page);
+        mPresenter.validateSearch(query, page, btnMain);
     }
 
     @OnTextChanged(R.id.tiet_main_page)
@@ -178,7 +173,7 @@ public class MainActivity extends BaseActivity implements MainView {
         final String query = tietMainQuery.getText().toString();
         final String page = tietMainPage.getText().toString();
 
-        mPresenter.validateSearch(query, page);
+        mPresenter.validateSearch(query, page, btnMain);
     }
 
     @OnClick(R.id.btn_main)
@@ -207,6 +202,7 @@ public class MainActivity extends BaseActivity implements MainView {
         tietMainPage.getText().clear();
         spMainType.setSelection(0);
         spMainResult.setSelection(0);
+        btnMain.setEnabled(false);
         mKeyboards.hide(clMain, this);
         clMain.requestFocus();
     }

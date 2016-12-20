@@ -1,6 +1,7 @@
 package com.baculsoft.java.android.views.main;
 
 import android.text.TextUtils;
+import android.widget.Button;
 
 import com.baculsoft.java.android.internal.data.local.TwitterSearch;
 import com.baculsoft.java.android.internal.data.local.TwitterSearchResult;
@@ -44,9 +45,11 @@ public class MainPresenter implements IPresenter<MainView> {
         safeUnsubscribe(mSubscription);
     }
 
-    public void validateSearch(final String query, final String page) {
+    public void validateSearch(final String query, final String page, final Button button) {
         if (!TextUtils.isEmpty(query) && !TextUtils.isEmpty(page)) {
-            mView.onValidate();
+            button.setEnabled(true);
+        } else {
+            button.setEnabled(false);
         }
     }
 
