@@ -16,7 +16,7 @@ buildscript {
 
         // ReactiveX
         rxAndroidVersion = '1.2.1'
-        rxJavaVersion = '1.2.4'
+        rxJavaVersion = '1.2.5'
 
         // Retrofit
         retrofitVersion = '2.1.0'
@@ -48,5 +48,5 @@ task clean(type: Delete) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.2.1'
+    gradleVersion = '3.3'
 }
